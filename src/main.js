@@ -9,18 +9,13 @@ import '@/firebase/init'
 import '@/firebase/authentication'
 import '@/misc/handle-apple-install-prompt'
 import 'pwacompat'
+import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
-
-console.log(`
-🍱 This app was bootstrapped with bento-starter 🍱
-
-👉 https://bento-starter.netlify.com/
-
-`)

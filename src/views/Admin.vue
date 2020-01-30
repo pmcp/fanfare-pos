@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>{{ appTitle }}</h1>
+  <div class="page-wrapper">
+    test
   </div>
 </template>
 
@@ -27,5 +27,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/theme/variables.scss';
 </style>
