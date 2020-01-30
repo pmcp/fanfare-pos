@@ -1,5 +1,10 @@
 # Fanfare POS
 
+- Hosted on Firebase
+  Deploy: 
+    npm run build
+    npx firebase deploy
+
 ## Data
 
 - Items [Firebase]
