@@ -49,7 +49,13 @@ const router = new Router({
       path: '/admin',
       name: 'admin',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Admin.vue')
+        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Admin-Home.vue')
+    },
+    {
+      path: '/admin/items',
+      name: 'items',
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Admin-Items.vue')
     },
     // {
     //   path: '/products/:id',

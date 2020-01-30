@@ -12,6 +12,16 @@
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item link :to="{ path: '/admin/items' }">
+          <v-list-item-action>
+            <v-icon>mdi-items</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              Items
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
