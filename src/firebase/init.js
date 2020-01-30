@@ -3,12 +3,13 @@ import 'firebase/auth'
 
 // The configuration below is not sensitive data. You can serenely add your config here
 const config = {
-  apiKey: 'AIzaSyCe6CSzOUs6_Ij_VHa6hancdEi6CNBtw7c',
-  authDomain: 'bento-starter.firebaseapp.com',
-  databaseURL: 'https://bento-starter.firebaseio.com',
-  projectId: 'bento-starter',
-  storageBucket: 'bento-starter.appspot.com',
-  messagingSenderId: '458464977217'
+  apiKey: "AIzaSyCh1mLGAY7eW8xQFp2GC0IhxstWI-11nYg",
+  authDomain: "fanfare-pos.firebaseapp.com",
+  databaseURL: "https://fanfare-pos.firebaseio.com",
+  projectId: "fanfare-pos",
+  storageBucket: "fanfare-pos.appspot.com",
+  messagingSenderId: "802311092129",
+  appId: "1:802311092129:web:a8cf0ea51635d149e9bde0"
 }
 
 firebase.initializeApp(config)
