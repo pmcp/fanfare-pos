@@ -1,6 +1,5 @@
 {
   "projects": {
-    "default": "bento-starter",
     "front": "fanfare-pos"
   }
 }
