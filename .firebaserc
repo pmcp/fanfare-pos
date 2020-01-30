@@ -1,5 +1,5 @@
 {
   "projects": {
-    "front": "fanfare-pos"
+    "default": "fanfare-pos"
   }
 }
