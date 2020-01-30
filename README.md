@@ -22,6 +22,12 @@
 
 - ProductTypes [Hardcoded]
 
+- Employee
+  - name
+    - first
+    - last
+  - orders
+  
 - Orders
   - Items
     - ID (string)
@@ -30,6 +36,7 @@
   - Table Id (integer)
   - Time created (timestamp)
   - Printed (bool)
+  - Employee
 
   - Clients [Firebase]
     - Id (string)
@@ -42,6 +49,16 @@
   - OrderId
   - Print copy
 
+- Stats
+  - item
+    - itemId
+    - history
+      - timing
+      - number
+    - total
+      - day
+        - number
+
 ## Firebase Functions
 - If new order, create print copy and add to queue
-- 
+- If new order, count drinks and add to stats
