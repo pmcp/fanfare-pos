@@ -52,10 +52,10 @@ const router = new Router({
         import(/* webpackChunkName: "client-chunk-products" */ '@/views/Admin-Home.vue')
     },
     {
-      path: '/admin/items',
-      name: 'items',
+      path: '/admin/products',
+      name: 'products',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Admin-Items.vue')
+        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Admin-Products.vue')
     },
     // {
     //   path: '/products/:id',

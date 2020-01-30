@@ -6,7 +6,6 @@ export default {
    */
   getUserProducts: async ({ rootState, commit }) => {
     const userProductDb = new UserProductsDB(rootState.authentication.user.id)
-
     const products = await userProductDb.readAll()
     commit('setProducts', products)
   },
@@ -46,5 +45,38 @@ export default {
     await userProductsDb.delete(productId)
     commit('removeProductById', productId)
     commit('removeProductDeletionPending', productId)
+  },
+
+  // From here is me
+  closeDialog: ({ state, commit }) => {
+    commit('setDialog', false)
+    setTimeout(() => {
+      commit('setEditedItem', state.defaultProduct)
+      commit('setEditedIndex', -1)
+    }, 300)
+  },
+
+  saveItem: ({ state, commit, dispatch }) => {
+    console.log(state.editedIndex)
+    if (state.editedIndex > -1) {
+      console.log('saving')
+      commit('saveEditedProduct')
+    } else {
+      console.log('adding')
+      commit('addEditedProduct')
+    }
+    dispatch('closeDialog')
+  },
+
+  editItem: ({ state, commit }, item) => {
+    commit('setEditedIndex', state.products.indexOf(item))
+    commit('setEditedItem', item)
+    commit('setDialog', true)
+  },
+
+  deleteItem: ({ state, commit }, item) => {
+    const index = state.products.indexOf(item)
+    // TODO: ADD POPUP WITH ALERT
+    commit('deleteItem', index)
   }
 }
