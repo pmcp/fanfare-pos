@@ -53,7 +53,7 @@ describe('authentication module action', () => {
 
       await actions.login({ commit, dispatch }, firebaseUser)
 
-      expect(dispatch).toHaveBeenCalledWith('products/getUserProducts', null, {
+      expect(dispatch).toHaveBeenCalledWith('products/getProducts', null, {
         root: true
       })
     })

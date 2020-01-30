@@ -15,7 +15,7 @@ export default {
       : userFromFirebase
 
     commit('setUser', user)
-    dispatch('products/getUserProducts', null, { root: true })
+    dispatch('products/getProducts', null, { root: true })
   },
 
   /**

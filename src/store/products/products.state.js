@@ -2,15 +2,15 @@ export default {
   dialog: false,
   products: [],
   productNameToCreate: '',
-  productDeletionPending: [],
-  productCreationPending: false,
+  loading: false,
   productHeaders: [
     {
       text: 'Name',
       align: 'left',
-      sortable: false,
+      sortable: true,
       value: 'name'
     },
+    { text: 'Id', value: 'id' },
     { text: 'Prijs', value: 'price' },
     { text: 'Extra Opties', value: 'options.active' },
     { text: 'Opmerking', value: 'remark' },

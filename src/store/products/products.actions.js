@@ -1,69 +1,43 @@
-import UserProductsDB from '@/firebase/user-products-db'
+import ProductsDB from '@/firebase/products-db'
 
 export default {
   /**
    * Fetch products of current loggedin user
    */
-  getUserProducts: async ({ rootState, commit }) => {
-    const userProductDb = new UserProductsDB(rootState.authentication.user.id)
-    const products = await userProductDb.readAll()
+  getProducts: async ({ commit }) => {
+    const productDb = new ProductsDB()
+    const products = await productDb.readAll()
     commit('setProducts', products)
   },
 
   /**
-   * Create a product for current loggedin user
+   * Create a product
    */
-  createUserProduct: async ({ commit, rootState }, product) => {
-    const userProductDb = new UserProductsDB(rootState.authentication.user.id)
-
-    commit('setProductCreationPending', true)
-    const createdProduct = await userProductDb.create(product)
+  createProduct: async ({ commit }, product) => {
+    const productDb = new ProductsDB()
+    commit('setLoading', true)
+    const createdProduct = await productDb.create(product)
     commit('addProduct', createdProduct)
-    commit('setProductCreationPending', false)
+    commit('setLoading', false)
   },
 
   /**
-   * Create a new product for current loggedin user and reset product name input
+   * Delete a product
    */
-  triggerAddProductAction: ({ dispatch, state, commit }) => {
-    if (state.productNameToCreate === '') return
-
-    const product = { name: state.productNameToCreate }
-    commit('setProductNameToCreate', '')
-    dispatch('createUserProduct', product)
-  },
-
-  /**
-   * Delete a user product from its id
-   */
-  deleteUserProduct: async ({ rootState, commit, getters }, productId) => {
-    if (getters.isProductDeletionPending(productId)) return
-
-    const userProductsDb = new UserProductsDB(rootState.authentication.user.id)
-
-    commit('addProductDeletionPending', productId)
-    await userProductsDb.delete(productId)
-    commit('removeProductById', productId)
-    commit('removeProductDeletionPending', productId)
-  },
-
-  // From here is me
-  closeDialog: ({ state, commit }) => {
-    commit('setDialog', false)
-    setTimeout(() => {
-      commit('setEditedItem', state.defaultProduct)
-      commit('setEditedIndex', -1)
-    }, 300)
+  deleteProduct: async ({ commit }, product) => {
+    const productDb = new ProductsDB()
+    commit('setLoading', true)
+    const deletedProduct = await productDb.delete(product.id)
+    commit('deleteProduct', deletedProduct)
+    commit('setLoading', false)
   },
 
   saveItem: ({ state, commit, dispatch }) => {
-    console.log(state.editedIndex)
     if (state.editedIndex > -1) {
-      console.log('saving')
       commit('saveEditedProduct')
     } else {
-      console.log('adding')
-      commit('addEditedProduct')
+      // commit('addEditedProduct')
+      dispatch('createProduct', state.editedProduct)
     }
     dispatch('closeDialog')
   },
@@ -74,9 +48,16 @@ export default {
     commit('setDialog', true)
   },
 
-  deleteItem: ({ state, commit }, item) => {
-    const index = state.products.indexOf(item)
-    // TODO: ADD POPUP WITH ALERT
-    commit('deleteItem', index)
+  closeDialog: ({ state, commit }) => {
+    commit('setDialog', false)
+    setTimeout(() => {
+      commit('setEditedItem', state.defaultProduct)
+      commit('setEditedIndex', -1)
+    }, 300)
   }
+  // deleteProduct: ({ state, commit }, item) => {
+  //   // const index = state.products.indexOf(item)
+  //   // TODO: ADD POPUP WITH ALERT
+  //   // commit('deleteItem', index)
+  // }
 }

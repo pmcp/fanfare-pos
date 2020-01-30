@@ -41,10 +41,10 @@ afterEach(() => {
 })
 
 describe('products module action', () => {
-  describe('getUserProducts', () => {
+  describe('getProducts', () => {
     it('should set products with ones owned by the current user', async () => {
       mockUsersDbReadAll.mockResolvedValue([product1, product2])
-      await actions.getUserProducts({ commit, rootState })
+      await actions.getProducts({ commit, rootState })
       expect(commit).toHaveBeenCalledWith('setProducts', [product1, product2])
     })
   })

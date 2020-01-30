@@ -25,20 +25,22 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="indigo" dark>
+    <v-app-bar app color="primary" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>Application</v-toolbar-title>
     </v-app-bar>
 
     <v-content>
-      <v-container class="fill-height" fluid>
-        <router-view />
-        <!-- <v-row align="center" justify="center">
-          <v-col class="text-center"></v-col>
-        </v-row> -->
+      <v-container  fluid>
+        
+        <v-row align="start" justify="center">
+          <v-col cols="12">
+            <router-view />
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
-    <v-footer color="indigo" app>
+    <v-footer color="primary" app>
       <span class="white--text">&copy; 2019</span>
     </v-footer>
     <new-content-available-toastr

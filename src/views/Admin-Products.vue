@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrapper">
+  <div>
     <admin-products-list></admin-products-list>
   </div>
 </template>

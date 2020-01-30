@@ -2,8 +2,9 @@
   <v-data-table
     :headers="productHeaders"
     :items="products"
-    :items-per-page="5"
+    :items-per-page="20"
     class="elevation-1"
+    :loading="loading"
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
@@ -226,7 +227,7 @@
       <v-icon small class="mr-2" @click="editItem(item)">
         edit
       </v-icon>
-      <v-icon small @click="deleteItem(item)">
+      <v-icon small @click="deleteProduct(item)">
         delete
       </v-icon>
     </template>
@@ -254,7 +255,8 @@ export default {
       'defaultProduct',
       'productTypes',
       'printers',
-      'newOption'
+      'newOption',
+      'loading'
     ]),
     ...mapState('app', ['networkOnLine']),
     formTitle() {
@@ -278,7 +280,7 @@ export default {
       'closeDialog',
       'saveItem',
       'editItem',
-      'deleteItem'
+      'deleteProduct'
     ])
   }
 }
