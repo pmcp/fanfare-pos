@@ -8,10 +8,8 @@ export default {
     state.itemDeletionPending.includes(itemId),
 
   inActiveOrder: state => (printer, productId) => {
-    console.log(printer, productId, state.activeOrder.products[printer])
-    find(
-      state.activeOrder.products[printer],
-      product => product.id === productId
-    )
+    
+    find(state.activeOrder.products[printer], product => product.id === productId)
   }
+    
 }
