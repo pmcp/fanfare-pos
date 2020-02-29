@@ -25,7 +25,7 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        authNotRequired: true
+        authNotRequired: false
       }
     },
     {
@@ -57,6 +57,34 @@ const router = new Router({
       component: () =>
         import(/* webpackChunkName: "client-chunk-products" */ '@/views/Admin-Products.vue')
     },
+    {
+      path: '/clients/:clientId/orders',
+      name: 'clientOrders',
+      props: true,
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Pos-Orders.vue')
+    },
+    {
+      path: '/clients/:clientId/order',
+      name: 'clientOrder',
+      props: true,
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Pos-Order.vue')
+    },
+    {
+      path: '/clients',
+      name: 'clients',
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Pos-Clients.vue')
+    },
+
+    {
+      path: '/orders',
+      name: 'orders',
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Pos-Orders.vue')
+    },
+
     // {
     //   path: '/products/:id',
     //   name: 'product',
@@ -81,6 +109,7 @@ router.beforeEach((to, from, next) => {
       store.state.authentication.user === null ? '/login' : '/check-login'
     return next(`${path}?redirectUrl=${to.path}`)
   }
+
   next()
 })
 

@@ -5,7 +5,7 @@
     npm run build
     npx firebase deploy
 
-## Data
+## Data Architecture
 
 - Items [Firebase]
   - Name  (string)

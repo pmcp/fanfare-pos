@@ -18,7 +18,27 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
-              Items
+              Producten
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link :to="{ path: '/clients' }">
+          <v-list-item-action>
+            <v-icon>mdi-items</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              Klanten
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link :to="{ path: '/orders' }">
+          <v-list-item-action>
+            <v-icon>mdi-items</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              Bestellingen
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -31,8 +51,7 @@
     </v-app-bar>
 
     <v-content>
-      <v-container  fluid>
-        
+      <v-container fluid>
         <v-row align="start" justify="center">
           <v-col cols="12">
             <router-view />

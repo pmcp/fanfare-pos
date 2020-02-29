@@ -1,4 +1,4 @@
-import { find } from 'lodash'
+import { find, filter } from 'lodash'
 
 export default {
   /**
@@ -6,6 +6,10 @@ export default {
    */
   isProductDeletionPending: state => productId =>
     state.productDeletionPending.includes(productId),
+
+  filteredProducts: state => productType => {
+    return filter(state.products, { type: productType })
+  },
 
   /**
    * Get product by id

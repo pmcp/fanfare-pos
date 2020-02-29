@@ -9,7 +9,7 @@ import '@/firebase/init'
 import '@/firebase/authentication'
 import '@/misc/handle-apple-install-prompt'
 import 'pwacompat'
-import vuetify from './plugins/vuetify';
+import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 

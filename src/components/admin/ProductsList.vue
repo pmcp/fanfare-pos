@@ -4,7 +4,7 @@
     :items="products"
     :items-per-page="20"
     class="elevation-1"
-    :loading="loading"
+    :loading="productsLoading"
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
@@ -47,6 +47,22 @@
                     >
                     </v-text-field>
                   </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-switch
+                      input-value="editedProduct.active"
+                      class="ma-4"
+                      label="Actief"
+                      required
+                      @change="
+                        editProduct({
+                          field: 'active',
+                          value: $event,
+                          subfield: null
+                        })
+                      "
+                    ></v-switch>
+                  </v-col>
+
                   <v-col cols="12" sm="12" md="12">
                     <v-text-field
                       label="Product price"
@@ -256,7 +272,7 @@ export default {
       'productTypes',
       'printers',
       'newOption',
-      'loading'
+      'productsLoading'
     ]),
     ...mapState('app', ['networkOnLine']),
     formTitle() {

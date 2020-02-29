@@ -9,7 +9,7 @@ export default {
   //   state.products.splice(index, 1)
   // },
 
-  setLoading: (state, value) => (state.loading = value),
+  setLoading: (state, value) => (state.productsLoading = value),
 
   /* Edit Product */
   editProduct: (state, { field, value, subfield }) => {
@@ -32,7 +32,7 @@ export default {
   removeOption: (state, { key }) => {
     state.editedProduct.options.value.splice(key, 1)
   },
-  editOption: (state, { value, key }) => {  
+  editOption: (state, { value, key }) => {
     state.editedProduct.options.value[key] = value
     state.editedProduct = _.cloneDeep(state.editedProduct)
   },

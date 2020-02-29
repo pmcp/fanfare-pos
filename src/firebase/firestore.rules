@@ -4,15 +4,29 @@ service cloud.firestore {
   
     match /users/{userId} {
        allow get: if authenticated() && request.auth.uid == userId;
+       allow list: if authenticated() && request.auth.uid == userId;
        allow create: if authenticated() && request.auth.uid == userId;
        allow update, delete: if authenticated() && request.auth.uid == userId;
     }
+    match /{document=**} {
+      allow get: if authenticated();
+			allow list: if authenticated();
+      allow create: if authenticated();
+      allow update, delete: if authenticated();
+    }
 
-    match /users/{userId}/products/{productId} {
-      allow get: if authenticated() && request.auth.uid == userId;
-			allow list: if authenticated() && request.auth.uid == userId;
-      allow create: if authenticated() && request.auth.uid == userId;
-      allow update, delete: if authenticated() && request.auth.uid == userId;
+    match /products {
+      allow get: if authenticated();
+			allow list: if authenticated();
+      allow create: if authenticated();
+      allow update, delete: if authenticated();
+    }
+
+    match /products/{productId} {
+      allow get: if authenticated();
+			allow list: if authenticated();
+      allow create: if authenticated();
+      allow update, delete: if authenticated();
     }
   }
-}
+} 

@@ -1,23 +1,45 @@
-import ProductsDB from '@/firebase/products-db'
+import ItemsDB from '@/firebase/Pos-db'
 
 export default {
   /**
    * Fetch products of current loggedin user
    */
-  getProducts: async ({ commit }) => {
-    const productDb = new ProductsDB()
-    const products = await productDb.readAll()
+  getProducts: async ({ commit, dispatch }, { active }) => {
+    const itemsDb = new ItemsDB('products')
+    let constraints = []
+    if (active) {
+      constraints = [...constraints, ['active', '==', active]]
+    }
+    /* If there are no constraints, reset it to null */
+    if (constraints.length === 0) {
+      constraints = null
+    }
+
+    const products = await itemsDb.readAll(constraints)
     commit('setProducts', products)
+
+    dispatch('orders/setActiveOrderTemplate', products, { root: true })
   },
 
   /**
    * Create a product
    */
   createProduct: async ({ commit }, product) => {
-    const productDb = new ProductsDB()
+    const itemsDb = new ItemsDB('products')
     commit('setLoading', true)
-    const createdProduct = await productDb.create(product)
+    const createdProduct = await itemsDb.create(product)
     commit('addProduct', createdProduct)
+    commit('setLoading', false)
+  },
+
+  /**
+   * Update a product
+   */
+  updateProduct: async ({ commit }, product) => {
+    const itemsDb = new ItemsDB('products')
+    commit('setLoading', true)
+    await itemsDb.update(product)
+
     commit('setLoading', false)
   },
 
@@ -25,9 +47,9 @@ export default {
    * Delete a product
    */
   deleteProduct: async ({ commit }, product) => {
-    const productDb = new ProductsDB()
+    const itemsDb = new ItemsDB('products')
     commit('setLoading', true)
-    const deletedProduct = await productDb.delete(product.id)
+    const deletedProduct = await itemsDb.delete(product.id)
     commit('deleteProduct', deletedProduct)
     commit('setLoading', false)
   },
@@ -35,6 +57,7 @@ export default {
   saveItem: ({ state, commit, dispatch }) => {
     if (state.editedIndex > -1) {
       commit('saveEditedProduct')
+      dispatch('updateProduct', state.editedProduct)
     } else {
       // commit('addEditedProduct')
       dispatch('createProduct', state.editedProduct)

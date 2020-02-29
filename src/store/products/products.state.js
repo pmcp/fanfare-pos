@@ -2,7 +2,7 @@ export default {
   dialog: false,
   products: [],
   productNameToCreate: '',
-  loading: false,
+  productsLoading: false,
   productHeaders: [
     {
       text: 'Name',
@@ -10,6 +10,7 @@ export default {
       sortable: true,
       value: 'name'
     },
+    { text: 'Actief', value: 'active' },
     { text: 'Id', value: 'id' },
     { text: 'Prijs', value: 'price' },
     { text: 'Extra Opties', value: 'options.active' },
@@ -24,6 +25,7 @@ export default {
   newOption: '',
   editedProduct: {
     name: '',
+    active: true,
     type: null,
     price: 0,
     extra: true,
@@ -36,6 +38,7 @@ export default {
   },
   defaultProduct: {
     name: '',
+    active: true,
     type: null,
     price: 0,
     extra: true,
