@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ activeOrder.total }}
     <pos-order-item
       v-for="product in filteredProducts(activeProductType)"
       :key="product.id"
@@ -12,7 +13,7 @@
         :value="type"
         @click="activeProductType = key"
       >
-        <span>{{ type }}</span>
+        <span>{{ type }} - {{ activeOrder.totals[type] }}</span>
         <!-- <v-icon>mdi-history</v-icon> -->
       </v-btn>
     </v-bottom-navigation>
@@ -38,8 +39,8 @@ export default {
       'products',
       'productTypes',
       'productsLoading',
-      'activeOrder'
-    ])
+    ]),
+    ...mapState('orders', ['activeOrder'])
     // ...mapState('app', ['networkOnLine'])
   },
   mounted() {

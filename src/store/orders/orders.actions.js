@@ -58,17 +58,37 @@ export default {
   },
 
   changeProductToActiveOrder: ({ state, commit }, { product, value }) => {
+
+
+    /* Add product to  activeOrder products list */
     let newValue = state.activeOrder.products[product.printer][product.id].value;
     newValue += value
     if( newValue < 0 ) {
       newValue = 0; 
     } else {
       commit('setProductInActiveOrder', { product, value: newValue })
+      commit('setProductInActiveOrder', { product, value: newValue })
+
+      /* Add or subtract to the total */
+      console.log(value)
+      commit('setTotal', value)
+      
+      /* Add or subtract to the total per type */
+      commit('setTotalPerType', { productType: product.type, value }) 
     }
+
+
+
   },
 
-  resetActiveOrder: ({ state, commit }) => {
-    commit('setActiveOrder', state.activeOrderTemplate)
+  setActiveOrderForClient: ({ state, commit }, client) => {
+    const activeOrder = cloneDeep(state.activeOrderTemplate);
+    activeOrder.user = {
+      id: client.id,
+      name: client.name,
+      table: client.table
+    }
+    commit('setActiveOrder', activeOrder)
   },
 
   setProductRemark: ({ state, commit }, { value, product}) => {
@@ -86,6 +106,8 @@ export default {
         table: null,
         name: null
       },
+      total: 0,
+      totals: {},
       waiter: rootState.authentication.user.id,
       remarks: '',
       products: {}
@@ -104,6 +126,12 @@ export default {
         remark: ''
       }
 
+      /* Create the object to save the totals in */
+      if (activeOrderTemplate.totals[product.type] === undefined) {
+        activeOrderTemplate.totals[product.type] = 0
+      }
+
+      /* Create the object to save the products in */
       if (activeOrderTemplate.products[product.printer] === undefined) {
         activeOrderTemplate.products[product.printer] = {}
       }
@@ -114,7 +142,7 @@ export default {
   },
 
   setActiveOrderOption: ({ commit }, { value, product, option}) => {
-    console.log(value, product, option)
+    console.log(option)
     commit('setActiveOrderOption', {value, product})
       
   } 

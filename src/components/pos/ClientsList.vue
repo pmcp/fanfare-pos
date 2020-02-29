@@ -5,7 +5,7 @@
         <v-list-item
           v-for="client in clients"
           :key="client.id"
-          @click="createNewOrder({ clientId: client.id })"
+          @click="createNewOrder(client)"
         >
           <v-list-item-avatar>
             <v-icon v-text="client.table"></v-icon>
@@ -50,10 +50,10 @@ export default {
 
   methods: {
     ...mapActions('clients', ['getClients']),
-    ...mapActions('orders', ['resetActiveOrder']),
-    createNewOrder({ clientId }) {
-      this.resetActiveOrder();
-      router.push({ path: `clients/${clientId}/order` })
+    ...mapActions('orders', ['setActiveOrderForClient']),
+    createNewOrder(client) {
+      this.setActiveOrderForClient(client);
+      router.push({ path: `clients/${client.id}/order` })
     }
   }
 }

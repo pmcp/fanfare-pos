@@ -5,6 +5,8 @@ export default {
   setOrders: (state, orders) => (state.orders = orders),
   addOrder: (state, order) => state.orders.push(order),
   setLoading: (state, value) => (state.ordersLoading = value),
+  setTotal: (state, value) => (state.activeOrder.total += value),
+  setTotalPerType: (state, { productType, value }) => (state.activeOrder.totals[productType] += value),
   setActiveOrderTemplate: (state, value) => (state.activeOrderTemplate = value),
   setActiveOrder: (state, value) => {
     state.activeOrder = cloneDeep(value)
