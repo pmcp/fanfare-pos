@@ -13,7 +13,13 @@
         :value="type"
         @click="activeProductType = key"
       >
-        <span>{{ type }} - {{ activeOrder.totals[type] }}</span>
+        <v-badge v-if="activeOrder.totals[type]" :content="activeOrder.totals[type]">
+          {{ type }}
+        </v-badge>
+        <span v-else>
+          {{ type }}
+        </span>
+        
         <!-- <v-icon>mdi-history</v-icon> -->
       </v-btn>
     </v-bottom-navigation>

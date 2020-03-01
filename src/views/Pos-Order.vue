@@ -1,5 +1,6 @@
 <template>
   <div>
+    <pos-orders-send></pos-orders-send>
     <pos-orders-create client-id="clientId"></pos-orders-create>
   </div>
 </template>
@@ -7,6 +8,7 @@
 <script>
 import { mapState } from 'vuex'
 import posOrdersCreate from '@/components/pos/OrdersCreate'
+import posOrdersSend from '@/components/pos/OrdersSend'
 
 export default {
   head() {
@@ -23,7 +25,7 @@ export default {
       ]
     }
   },
-  components: { posOrdersCreate },
+  components: { posOrdersCreate, posOrdersSend },
   props: {
     clientId: {
       type: String,

@@ -23,8 +23,8 @@ export default {
     commit('setLoading', true)
 
     const createdItem = await itemsDb.create(item)
-    commit('addItem', createdItem)
-    dispatch('getItems', { active: true })
+    commit('addClient', createdItem)
+    dispatch('getClients', { active: true })
     commit('setLoading', false)
   },
 

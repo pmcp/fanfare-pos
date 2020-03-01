@@ -28,15 +28,15 @@ export default {
   /**
    * Create an Item
    */
-  createOrder: async ({ commit, dispatch }, item) => {
+  createOrderFb: async ({ commit, dispatch }, item) => {
     // userId
 
-    const itemsDb = new ItemsDB('clients')
+    const itemsDb = new ItemsDB('orders')
     commit('setLoading', true)
 
-    const createdItem = await itemsDb.create(item)
-    commit('addItem', createdItem)
-    dispatch('getItems', { active: true })
+    await itemsDb.create(item)
+    
+    dispatch('getOrders', { active: true })
     commit('setLoading', false)
   },
 
@@ -145,5 +145,11 @@ export default {
     console.log(option)
     commit('setActiveOrderOption', {value, product})
       
-  } 
+  },
+
+
+  createOrder: ({ state, dispatch }) => {
+    dispatch('createOrderFb', state.activeOrder)
+    
+  },
 }
