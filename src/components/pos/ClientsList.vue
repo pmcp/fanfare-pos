@@ -32,6 +32,7 @@
 <script>
 // import ProductItem from '@/components/ProductItem'
 import { mapState, mapActions, mapGetters } from 'vuex'
+// eslint-disable-next-line import/extensions
 import router from '@/router'
 
 export default {
@@ -41,7 +42,7 @@ export default {
   computed: {
     ...mapGetters('clients', ['isProductDeletionPending']),
     ...mapState('clients', ['clients', 'loading']),
-    ...mapState('app', ['networkOnLine'])
+    ...mapState('app', ['networkOnLine']),
   },
   mounted() {
     // Get all the active clients
@@ -49,12 +50,12 @@ export default {
   },
 
   methods: {
-    ...mapActions('clients', ['getClients']),
+    ...mapActions('clients', ['getClients', '']),
     ...mapActions('orders', ['setActiveOrderForClient']),
     createNewOrder(client) {
-      this.setActiveOrderForClient(client);
+      this.setActiveOrderForClient(client)
       router.push({ path: `clients/${client.id}/order` })
-    }
+    },
   }
 }
 </script>

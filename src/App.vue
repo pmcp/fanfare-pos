@@ -59,9 +59,6 @@
         </v-row>
       </v-container>
     </v-content>
-    <v-footer color="primary" app>
-      <span class="white--text">&copy; 2019</span>
-    </v-footer>
     <new-content-available-toastr
       v-if="newContentAvailable"
       class="new-content-available-toastr"
@@ -91,10 +88,9 @@ export default {
     ...mapGetters('app', ['newContentAvailable']),
     ...mapState('app', ['showAddToHomeScreenModalForApple', 'refreshingApp'])
   },
-  methods: mapActions('app', [
-    'closeAddToHomeScreenModalForApple',
-    'serviceWorkerSkipWaiting'
-  ])
+  methods: {
+    ...mapActions('app', ['closeAddToHomeScreenModalForApple', 'serviceWorkerSkipWaiting'])
+  }
 }
 </script>
 

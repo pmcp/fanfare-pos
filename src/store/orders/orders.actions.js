@@ -1,4 +1,5 @@
 import { cloneDeep } from 'lodash'
+// eslint-disable-next-line import/extensions
 import ItemsDB from '@/firebase/Pos-db'
 
 export default {
@@ -30,12 +31,13 @@ export default {
    */
   createOrderFb: async ({ commit, dispatch }, item) => {
     // userId
+    console.log(item)
 
     const itemsDb = new ItemsDB('orders')
     commit('setLoading', true)
 
     await itemsDb.create(item)
-    
+
     dispatch('getOrders', { active: true })
     commit('setLoading', false)
   },
@@ -51,51 +53,52 @@ export default {
     commit('setLoading', false)
   },
 
-  editOrder: ({ state, commit }, item) => {
-    commit('setEditedIndex', state.items.indexOf(item))
-    commit('setEditedItem', item)
-    commit('setDialog', true)
-  },
+  // editOrder: ({ state, commit }, item) => {
+  //   commit('setEditedIndex', state.items.indexOf(item))
+  //   commit('setEditedItem', item)
+  //   commit('setDialog', true)
+  // },
 
-  changeProductToActiveOrder: ({ state, commit }, { product, value }) => {
-
-
+  changeProductToActiveOrder: ({ state, commit }, { product, value, position }) => {
     /* Add product to  activeOrder products list */
-    let newValue = state.activeOrder.products[product.printer][product.id].value;
+    let newValue = state.activeOrder.products[product.printer][product.id].value
     newValue += value
-    if( newValue < 0 ) {
-      newValue = 0; 
-    } else {
+    if (newValue >= 0) {
       commit('setProductInActiveOrder', { product, value: newValue })
-      commit('setProductInActiveOrder', { product, value: newValue })
+      // if we are adding (value = 1) add an option (false or empty array) to options
+      if(product.options.active) {
+        if(value === 1){
+          commit('setProductOptionsInActiveOrder', { product, value: newValue, add: true })
+        }
+        if(value === -1){
+          commit('setProductOptionsInActiveOrder', { product, value: newValue, add: false, position })
+        }
+      }
 
       /* Add or subtract to the total */
-      console.log(value)
       commit('setTotal', value)
-      
+
       /* Add or subtract to the total per type */
-      commit('setTotalPerType', { productType: product.type, value }) 
+      commit('setTotalPerType', { productType: product.type, value })
     }
-
-
-
   },
 
   setActiveOrderForClient: ({ state, commit }, client) => {
-    const activeOrder = cloneDeep(state.activeOrderTemplate);
-    activeOrder.user = {
-      id: client.id,
-      name: client.name,
-      table: client.table
+    if (state.setActiveOrderForClient !== null) {
+      const activeOrder = cloneDeep(state.activeOrderTemplate)
+      activeOrder.user = {
+        id: client.id,
+        name: client.name,
+        table: client.table,
+      }
+      commit('setActiveOrder', activeOrder)
     }
-    commit('setActiveOrder', activeOrder)
   },
 
-  setProductRemark: ({ state, commit }, { value, product}) => {
-    const activeOrder = cloneDeep(state.activeOrder);
+  setProductRemark: ({ state, commit }, { value, product }) => {
+    const activeOrder = cloneDeep(state.activeOrder)
     activeOrder.products[product.printer][product.id].remark = value
     commit('setActiveOrder', activeOrder)
-
   },
 
   setActiveOrderTemplate: ({ commit, rootState }, products) => {
@@ -104,13 +107,14 @@ export default {
       user: {
         id: null,
         table: null,
-        name: null
+        name: null,
       },
       total: 0,
       totals: {},
       waiter: rootState.authentication.user.id,
       remarks: '',
-      products: {}
+      products: {},
+      printStatus: 0
     }
 
     for (let i = 0; i < products.length; i += 1) {
@@ -123,7 +127,7 @@ export default {
         type: product.type,
         options: {},
         value: 0,
-        remark: ''
+        remark: '',
       }
 
       /* Create the object to save the totals in */
@@ -141,15 +145,11 @@ export default {
     commit('setActiveOrderTemplate', activeOrderTemplate)
   },
 
-  setActiveOrderOption: ({ commit }, { value, product, option}) => {
-    console.log(option)
-    commit('setActiveOrderOption', {value, product})
-      
+  setActiveOrderOption: ({ commit }, { value, product, option, multiple }) => {
+      commit('setActiveOrderOption', { value, product, option, multiple })
   },
-
 
   createOrder: ({ state, dispatch }) => {
     dispatch('createOrderFb', state.activeOrder)
-    
   },
 }

@@ -8,6 +8,7 @@ export default {
     state.productDeletionPending.includes(productId),
 
   filteredProducts: state => productType => {
+    console.log(productType)
     return filter(state.products, { type: productType })
   },
 

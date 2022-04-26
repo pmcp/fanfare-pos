@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <v-btn color="error" @click="overlay = !overlay">
-      Voeg klant toe
+      Nieuwe bestelling
     </v-btn>
 
     <v-overlay :value="overlay">
@@ -13,7 +13,6 @@
             <v-text-field
               v-model="newClient.name"
               label="Naam"
-              required
             ></v-text-field>
 
             <v-text-field
@@ -29,7 +28,7 @@
           </v-btn>
 
           <v-btn color="orange" text @click="add(newClient)">
-            Voeg toe
+            Start
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -65,6 +64,10 @@ export default {
     add(client) {
       /* TODO: Should go to store */
       this.createClient(client)
+      // Go to order form
+      // http://localhost:8081/clients/O2yyNnTjmIwQRoAkOkFD/order
+
+
       this.closeForm()
     }
   }

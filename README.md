@@ -1,4 +1,4 @@
-# Fanfare POS
+a# Fanfare POS
 
 - Hosted on Firebase
   Deploy: 

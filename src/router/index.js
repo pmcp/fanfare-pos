@@ -80,10 +80,11 @@ const router = new Router({
 
     {
       path: '/orders',
-      name: 'orders',
+      name: '   ',
       component: () =>
         import(/* webpackChunkName: "client-chunk-products" */ '@/views/Pos-Orders.vue')
     },
+
 
     // {
     //   path: '/products/:id',

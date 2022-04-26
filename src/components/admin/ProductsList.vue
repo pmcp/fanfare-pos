@@ -95,8 +95,9 @@
                     ></v-switch>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
+                    {{ editedProduct }}
                     <v-select
-                      input-value="editedProduct.extra"
+                      :value="editedProduct.type"
                       :items="productTypes"
                       label="Type"
                       required
@@ -111,7 +112,7 @@
                   </v-col>
                   <v-col>
                     <v-select
-                      input-value="editedProduct.printer"
+                      :value="editedProduct.printer"
                       :items="printers"
                       :rules="[v => !!v || 'Printer is verplicht']"
                       label="Printer"
