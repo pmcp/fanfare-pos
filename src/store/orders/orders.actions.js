@@ -1,6 +1,8 @@
 import { cloneDeep } from 'lodash'
 // eslint-disable-next-line import/extensions
 import ItemsDB from '@/firebase/Pos-db'
+// eslint-disable-next-line import/extensions
+import router from '@/router'
 
 export default {
   /**
@@ -151,5 +153,8 @@ export default {
 
   createOrder: ({ state, dispatch }) => {
     dispatch('createOrderFb', state.activeOrder)
+  //  Move back to home
+    router.push(`/`)
+
   },
 }

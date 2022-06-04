@@ -60,6 +60,8 @@ export default {
     closeForm() {
       this.overlay = false
       this.resetItem()
+      // Move to order form
+
     },
     add(client) {
       /* TODO: Should go to store */

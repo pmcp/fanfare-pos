@@ -2,9 +2,9 @@
   <div>
     <!--    <template v-if="activeOrder.totals !== undefined && ">-->
     <template v-if="activeOrder.totals !== undefined">
-      <pre>
-        {{ activeOrder }}
-      </pre>
+      <!--      <pre>-->
+      <!--        {{ activeOrder }}-->
+      <!--      </pre>-->
       <pos-order-item
         v-for="product in filteredProducts(activeProductType)"
         :key="product.id"
@@ -32,8 +32,9 @@
 </template>
 
 <script>
-import PosOrderItem from '@/components/pos/OrderItem'
 import { mapState, mapGetters } from 'vuex'
+// eslint-disable-next-line import/extensions
+import PosOrderItem from '@/components/pos/OrderItem'
 
 export default {
   components: {

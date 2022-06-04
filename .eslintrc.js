@@ -18,7 +18,8 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-return-assign': 'off',
     'no-var': 2,
-    'prefer-const': 2
+    'prefer-const': 2,
+    'import/extensions': [ 'error', 'ignorePackages', { js: 'never' }, ]
   },
   parserOptions: {
     parser: 'babel-eslint'

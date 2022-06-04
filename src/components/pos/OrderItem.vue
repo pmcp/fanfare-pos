@@ -1,6 +1,5 @@
 <template>
   <v-container fluid>
-    <v-btn color="success">Send Order</v-btn>
     <v-row align="center" no-gutters justify="space-between" class="ma-0">
       <v-col cols="2">
         {{ activeOrder.products[product.printer][product.id].value }}
@@ -40,7 +39,6 @@
       </v-row>
       <div v-if="product.options.active">
         <v-row v-for="(productOptions, k) in activeOrder.products[product.printer][product.id].options" :key="`productOptions-${k}`">
-
           <v-col cols="8" >
             <div v-if="product.options.selectMultiple">
               <v-checkbox
@@ -80,24 +78,25 @@
         </v-row>
     </div>
 
-
-    <v-expansion-panels flat>
-      <v-expansion-panel>
-        <v-expansion-panel-header disable-icon-rotate>
-          Opmerking
-          <template v-slot:actions>
-            <v-icon color="error">mdi-alert-circle</v-icon>
-          </template>
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <v-textarea
-            :value="activeOrder.products[product.printer][product.id].remark"
-            name="product-remark"
-            @input="setProductRemark({ value: $event, product })"
-          ></v-textarea>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
+    <div v-if="product.remark">
+      <v-expansion-panels flat>
+        <v-expansion-panel>
+          <v-expansion-panel-header disable-icon-rotate>
+            Opmerking
+            <template v-slot:actions>
+              <v-icon color="error">mdi-alert-circle</v-icon>
+            </template>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-textarea
+              :value="activeOrder.products[product.printer][product.id].remark"
+              name="product-remark"
+              @input="setProductRemark({ value: $event, product })"
+            ></v-textarea>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+    </div>
   </v-container>
 
 

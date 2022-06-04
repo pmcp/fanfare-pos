@@ -1,4 +1,7 @@
+// eslint-disable-next-line import/extensions
 import ItemsDB from '@/firebase/Pos-db'
+// eslint-disable-next-line import/extensions
+import router from '@/router'
 
 export default {
   /**
@@ -26,6 +29,12 @@ export default {
     commit('addClient', createdItem)
     dispatch('getClients', { active: true })
     commit('setLoading', false)
+
+    // Got user, will now move to form
+
+    console.log(createdItem)
+    dispatch('orders/setActiveOrderForClient', createdItem, { root: true })
+    router.push(`/clients/${createdItem.id}/order`)
   },
 
   /**

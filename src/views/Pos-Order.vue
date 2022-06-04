@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ correctOrder }}
+    <!--    {{ correctOrder }}-->
     <!--    <div-->
     <!--      v-if="-->
     <!--        activeOrder.totals !== undefined && activeOrder.products !== undefined-->
@@ -9,7 +9,7 @@
     <!--    {{ activeOrder }}-->
     <!--    </div>-->
 
-    MODULE HERE THAT INDICATES IF ORDER IS CORRECT vs INCORRECT
+    <!-- TODO: MODULE HERE THAT INDICATES IF ORDER IS CORRECT vs INCORRECT-->
     <pos-orders-send></pos-orders-send>
 
       <pos-orders-create :client-id="activeOrder.user.id"></pos-orders-create>

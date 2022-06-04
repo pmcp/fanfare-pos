@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Head from 'vue-head'
-import Home from '@/views/Home'
-import CheckLogin from '@/views/CheckLogin'
 import { isNil } from 'lodash'
+// eslint-disable-next-line import/extensions
 import store from '@/store'
 
 Vue.use(Router)
@@ -23,7 +22,8 @@ const router = new Router({
     {
       path: '/home',
       name: 'home',
-      component: Home,
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-login" */ '@/views/Home.vue'),
       meta: {
         authNotRequired: false
       }
@@ -31,7 +31,8 @@ const router = new Router({
     {
       path: '/check-login',
       name: 'check-login',
-      component: CheckLogin,
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-login" */ '@/views/CheckLogin.vue'),
       meta: {
         authNotRequired: true
       }
@@ -43,6 +44,15 @@ const router = new Router({
         import(/* webpackChunkName: "client-chunk-login" */ '@/views/Login.vue'),
       meta: {
         authNotRequired: true
+      }
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-login" */ '@/views/User-Home.vue'),
+      meta: {
+        authNotRequired: false
       }
     },
     {

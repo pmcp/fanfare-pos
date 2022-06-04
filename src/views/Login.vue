@@ -18,7 +18,7 @@
       class="login-btn"
       @click="login"
     >
-      Login with google
+      Login
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@
 import { mapState, mapMutations } from 'vuex'
 import { isNil } from 'lodash'
 import firebase from 'firebase/app'
-import { desktop as isDekstop } from 'is_js'
+// import { desktop as isDekstop } from 'is_js'
 
 export default {
   data: () => ({ loginError: null }),
@@ -52,6 +52,7 @@ export default {
   watch: {
     user: {
       handler(user) {
+
         if (!isNil(user)) {
           const redirectUrl = isNil(this.$route.query.redirectUrl)
             ? '/products'
@@ -66,21 +67,44 @@ export default {
     ...mapMutations('authentication', ['setUser']),
     async login() {
       this.loginError = null
-      const provider = new firebase.auth.GoogleAuthProvider()
+
+
+      const email="pos@maartenlauwaert.eu";
+      const password="fanfare2022";
+      //
+      //   // Create User with Email and Password
+      //   firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      //   // Handle Errors here.
+      //   const errorCode = error.code;
+      //   const errorMessage = error.message;
+      //   console.log(errorCode);
+      //   console.log(errorMessage);
+      // });
+      //
+
+      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+
+      // const provider = new firebase.auth.EmailAuthProvider()
       this.setUser(undefined)
 
-      try {
-        // Firebase signin with popup is faster than redirect
-        // but we can't use it on mobile because it's not well supported
-        // when app is running as standalone on ios & android
-        // eslint-disable-next-line no-unused-expressions
-        isDekstop()
-          ? await firebase.auth().signInWithPopup(provider)
-          : await firebase.auth().signInWithRedirect(provider)
-      } catch (err) {
-        this.loginError = err
-        this.setUser(null)
-      }
+      // try {
+      //   // Firebase signin with popup is faster than redirect
+      //   // but we can't use it on mobile because it's not well supported
+      //   // when app is running as standalone on ios & android
+      //   // eslint-disable-next-line no-unused-expressions
+      //   isDekstop()
+      //     ? await firebase.auth().signInWithPopup(provider)
+      //     : await firebase.auth().signInWithRedirect(provider)
+      // } catch (err) {
+      //   this.loginError = err
+      //   this.setUser(null)
+      // }
     }
   }
 }

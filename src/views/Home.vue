@@ -1,11 +1,13 @@
 <template>
   <div>
     <h1>{{ appTitle }}</h1>
+    <pos-clients-create></pos-clients-create>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import posClientsCreate from '@/components/pos/ClientsCreate.vue'
 
 export default {
   head() {
@@ -22,6 +24,7 @@ export default {
       ]
     }
   },
+  components: { posClientsCreate },
   computed: mapState('app', ['appTitle'])
 }
 </script>
