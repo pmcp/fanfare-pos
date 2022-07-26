@@ -88,7 +88,7 @@ export default {
   setActiveOrderForClient: ({ state, commit }, client) => {
     if (state.setActiveOrderForClient !== null) {
       const activeOrder = cloneDeep(state.activeOrderTemplate)
-      activeOrder.user = {
+        activeOrder.user = {
         id: client.id,
         name: client.name,
         table: client.table,
@@ -129,6 +129,7 @@ export default {
         type: product.type,
         options: {},
         value: 0,
+        order: product.order,
         remark: '',
       }
 

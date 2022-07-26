@@ -8,8 +8,13 @@ export default {
     state.productDeletionPending.includes(productId),
 
   filteredProducts: state => productType => {
-    console.log(productType)
     return filter(state.products, { type: productType })
+  },
+
+  selectedProducts: (state, getters, rootState) => {
+    console.log(rootState.orders)
+    if(!rootState.orders) return [];
+    return state.products.filter(product => rootState.orders.activeOrder.products[product.printer][product.id].value > 0)
   },
 
   /**

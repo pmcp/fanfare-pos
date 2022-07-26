@@ -1,3 +1,5 @@
+import { orderBy } from 'lodash'
+// eslint-disable-next-line import/extensions
 import ItemsDB from '@/firebase/Pos-db'
 
 export default {
@@ -15,8 +17,13 @@ export default {
       constraints = null
     }
 
+
+
     const products = await itemsDb.readAll(constraints)
-    commit('setProducts', products)
+    // To be sure: change "Order" string to number, cos some of them are turned into strings
+    const orderToString = products.map(x => x = { ...x, order: x.order*1 } )
+    const ordered = orderBy(orderToString, ['order'], ['asc'])
+    commit('setProducts', ordered)
 
     dispatch('orders/setActiveOrderTemplate', products, { root: true })
   },
@@ -25,6 +32,8 @@ export default {
    * Create a product
    */
   createProduct: async ({ commit }, product) => {
+
+
     const itemsDb = new ItemsDB('products')
     commit('setLoading', true)
     const createdProduct = await itemsDb.create(product)
@@ -39,7 +48,6 @@ export default {
     const itemsDb = new ItemsDB('products')
     commit('setLoading', true)
     await itemsDb.update(product)
-
     commit('setLoading', false)
   },
 
@@ -69,6 +77,22 @@ export default {
     commit('setEditedIndex', state.products.indexOf(item))
     commit('setEditedItem', item)
     commit('setDialog', true)
+  },
+
+  move: async ({ state, dispatch }, { item, direction }) => {
+    console.log(item.order + direction)
+
+    const surroundingProduct = state.products[item.order*1 + direction*1 ]
+    const updatedItem = {...item, order: item.order*1 + direction*1}
+    const updatedSurroundingProduct = {...surroundingProduct, order: surroundingProduct.order*1 + direction*-1 }
+    console.log(updatedSurroundingProduct)
+
+    console.log(updatedItem, updatedSurroundingProduct)
+    await dispatch('updateProduct', updatedItem)
+    await dispatch('updateProduct', updatedSurroundingProduct)
+    dispatch('getProducts', false)
+    // console.log(state.products)
+    // console.log(item, direction)
   },
 
   closeDialog: ({ state, commit }) => {

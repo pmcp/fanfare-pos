@@ -1,39 +1,20 @@
 <template>
-  <div class="text-center">
-    <v-btn color="error" @click="overlay = !overlay">
-      Nieuwe bestelling
-    </v-btn>
+  <v-container fill-height fluid class="h-full">
+    <v-layout justify-center  row fill-height>
+      <v-text-field
+        v-model="newClient.table"
+        label="Tafel"
+        color="black"
+        @keydown.enter="add(newClient)"
+      ></v-text-field>
 
-    <v-overlay :value="overlay">
-      <v-card class="mx-auto">
-        <v-card-title>Nieuwe Klant</v-card-title>
-
-        <v-card-text class="text--primary" :loading="clientsLoading">
-          <v-form ref="form">
-            <v-text-field
-              v-model="newClient.name"
-              label="Naam"
-            ></v-text-field>
-
-            <v-text-field
-              v-model="newClient.table"
-              label="Tafel"
-            ></v-text-field>
-          </v-form>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-btn color="orange" text @click="closeForm">
-            Annuleer
-          </v-btn>
-
-          <v-btn color="orange" text @click="add(newClient)">
-            Start
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-overlay>
-  </div>
+      <v-bottom-navigation fixed horizontal grow>
+        <v-btn color="green"  block @click="add(newClient)">
+          Start
+        </v-btn>
+      </v-bottom-navigation>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -64,7 +45,7 @@ export default {
 
     },
     add(client) {
-      /* TODO: Should go to store */
+      if(this.newClient.table === '') return;
       this.createClient(client)
       // Go to order form
       // http://localhost:8081/clients/O2yyNnTjmIwQRoAkOkFD/order

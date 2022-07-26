@@ -2,16 +2,27 @@
   <div>
     <!--    <template v-if="activeOrder.totals !== undefined && ">-->
     <template v-if="activeOrder.totals !== undefined">
-      <!--      <pre>-->
-      <!--        {{ activeOrder }}-->
-      <!--      </pre>-->
-      <pos-order-item
-        v-for="product in filteredProducts(activeProductType)"
-        :key="product.id"
-        :product="product"
-      ></pos-order-item>  
-      
-      <v-bottom-navigation v-model="activeProductType" absolute horizontal grow>
+      <div v-if="activeProductType === 'overview'">
+        <pos-orders-send>
+          <div>
+            <pos-order-item
+              v-for="product in selectedProducts"
+              :key="product.id"
+              :product="product"
+            ></pos-order-item>
+          </div>
+        </pos-orders-send>
+      </div>
+
+      <div v-else >
+        <pos-order-item
+          v-for="product in filteredProducts(activeProductType)"
+          :key="product.id"
+          :product="product"
+        ></pos-order-item>
+      </div>
+      <div style="height:100px"></div>
+      <v-bottom-navigation v-model="activeProductType" fixed horizontal grow>
         <v-btn
           v-for="(type, key) in productTypes"
           :key="`type-${key}`"
@@ -25,7 +36,14 @@
           </span>
           <!-- <v-icon>mdi-history</v-icon> -->
         </v-btn>
-
+        <v-btn color="green" value="overview">
+          <v-badge v-if="activeOrder.total" :content="activeOrder.total">
+            Totaal
+          </v-badge>
+          <span v-else>
+            Totaal
+          </span>
+        </v-btn>
       </v-bottom-navigation>
     </template>
   </div>
@@ -35,10 +53,13 @@
 import { mapState, mapGetters } from 'vuex'
 // eslint-disable-next-line import/extensions
 import PosOrderItem from '@/components/pos/OrderItem'
+// eslint-disable-next-line import/extensions
+import posOrdersSend from '@/components/pos/OrdersSend'
 
 export default {
   components: {
-    PosOrderItem
+    PosOrderItem, posOrdersSend
+
   },
   data() {
     return {
@@ -46,7 +67,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('products', ['filteredProducts']),
+    ...mapGetters('products', ['filteredProducts', 'selectedProducts']),
     ...mapState('products', [
       'products',
       'productTypes',

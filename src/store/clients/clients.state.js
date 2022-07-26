@@ -5,6 +5,6 @@ export default {
   defaultClient: {
     active: true,
     name: '',
-    table: 0
+    table: ''
   }
 }

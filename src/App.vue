@@ -2,13 +2,13 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app>
       <v-list dense>
-        <v-list-item link :to="{ path: '/admin' }">
+        <v-list-item link :to="{ path: '/' }">
           <v-list-item-action>
             <v-icon>mdi-settings</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
-              Admin
+              Bestel
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -22,36 +22,26 @@
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link :to="{ path: '/clients' }">
-          <v-list-item-action>
-            <v-icon>mdi-items</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              Klanten
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
         <v-list-item link :to="{ path: '/orders' }">
           <v-list-item-action>
             <v-icon>mdi-items</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
-              Bestellingen
+              Geschiedenis
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app  dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Vlaamse Kermis 2022</v-toolbar-title>
     </v-app-bar>
 
     <v-content>
-      <v-container fluid>
+      <v-container fill-height fluid>
         <v-row align="start" justify="center">
           <v-col cols="12">
             <router-view />
@@ -75,9 +65,11 @@
 </template>
 
 <script>
-import NewContentAvailableToastr from '@/components/NewContentAvailableToastr'
-import AppleAddToHomeScreenModal from '@/components/AppleAddToHomeScreenModal'
 import { mapState, mapActions, mapGetters } from 'vuex'
+// eslint-disable-next-line import/extensions
+import NewContentAvailableToastr from '@/components/NewContentAvailableToastr'
+// eslint-disable-next-line import/extensions
+import AppleAddToHomeScreenModal from '@/components/AppleAddToHomeScreenModal'
 
 export default {
   components: { NewContentAvailableToastr, AppleAddToHomeScreenModal },
@@ -95,6 +87,11 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
 body {
   margin: 0;
 

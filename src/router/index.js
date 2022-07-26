@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Head from 'vue-head'
-import { isNil } from 'lodash'
+import { isNil, isEmpty } from 'lodash'
 // eslint-disable-next-line import/extensions
 import store from '@/store'
 
@@ -112,6 +112,7 @@ const router = new Router({
  */
 // eslint-disable-next-line consistent-return
 router.beforeEach((to, from, next) => {
+
   if (
     !(to.meta && to.meta.authNotRequired) &&
     isNil(store.state.authentication.user)
@@ -120,6 +121,9 @@ router.beforeEach((to, from, next) => {
       store.state.authentication.user === null ? '/login' : '/check-login'
     return next(`${path}?redirectUrl=${to.path}`)
   }
+
+  // If arriving on order page without an active user, go back
+  if(to.name === 'clientOrder' && isEmpty(store.state.orders.activeOrder)) return next(`/`)
 
   next()
 })

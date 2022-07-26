@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>{{ appTitle }}</h1>
     <pos-clients-create></pos-clients-create>
   </div>
 </template>

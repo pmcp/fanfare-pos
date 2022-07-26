@@ -79,6 +79,23 @@
                     >
                     </v-text-field>
                   </v-col>
+
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field
+                      :value="editedProduct.order"
+                      label="Volgorde"
+                      required
+                      @input="
+                        editProduct({
+                          field: 'order',
+                          value: $event,
+                          subfield: null
+                        })
+                      "
+                    >
+                    </v-text-field>
+                  </v-col>
+
                   <v-col cols="12" sm="12" md="12">
                     <v-switch
                       input-value="editedProduct.extra"
@@ -240,12 +257,18 @@
         </v-dialog>
       </v-toolbar>
     </template>
-    <template v-slot:item.action="{ item }">
+    a<template v-slot:item.action="{ item  }">
       <v-icon small class="mr-2" @click="editItem(item)">
         edit
       </v-icon>
-      <v-icon small @click="deleteProduct(item)">
+      <v-icon small class="mr-2" @click="deleteProduct(item)">
         delete
+      </v-icon>
+      <v-icon small class="mr-2" @click="move({item: item, direction: -1})">
+        Up
+      </v-icon>
+      <v-icon small @click="move({item: item, direction: 1})">
+        Down
       </v-icon>
     </template>
   </v-data-table>
@@ -297,7 +320,8 @@ export default {
       'closeDialog',
       'saveItem',
       'editItem',
-      'deleteProduct'
+      'deleteProduct',
+      'move'
     ])
   }
 }

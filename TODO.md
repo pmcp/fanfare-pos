@@ -1,15 +1,16 @@
 DOING
-- Remove login?
+- Sync to excel via zapier
 
 TODO
-- Ordering products
-
-[comment]: <> (- Add remark flow again)
+- Printer beheer erin steken ( kies locatie - print test )
+- Melding dat ok bij verstuur
+- Terugkoppeling bestelling - verstuurd - printed
+- Filmpje maken voor installatie
 
 OLD
 - Add remark for ordering + printing
 - Clean up ordering form
-- How to handle users (waiters)?
+- How to handle users   (waiters)?
 - Add place to fill in printer (IP etc)
 - Fix service account shizzle (disabled for now)
 - Add printers to mobile vikings
@@ -27,14 +28,15 @@ Login Netgear:
 - pin: 1111
 
 Raspberry:
+- To find ip: ping raspberrypi
 - login: pi - pmcppaulmcparty
 - wifi = Friendly Network
 - ssh pi@ IP adresss
+- Server files are in ~/Documents/firebase-pos-server
 
 
 Handleiding
-- Eerst router opstarten (Netgear)
+- Eerst printers opstarten: als blauw lichtje brandt: ok.
+- Router opstarten (Netgear)
   - Hou knop aan de zijkant enkele ingedrukt, tot de modem opstart.
-  - 
 - Dan Raspberry Pi insteken
-- Dan printers insteken

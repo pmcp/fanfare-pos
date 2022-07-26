@@ -12,6 +12,7 @@ export default {
     },
     { text: 'Actief', value: 'active' },
     { text: 'Id', value: 'id' },
+    { text: 'Volgorde', value: 'order' },
     { text: 'Prijs', value: 'price' },
     { text: 'Extra Opties', value: 'options.active' },
     { text: 'Opmerking', value: 'remark' },
@@ -19,7 +20,7 @@ export default {
     { text: 'Actions', value: 'action', sortable: false }
   ],
   editedIndex: -1,
-  productTypes: ['voorgerecht', 'hoofgerecht', 'dessert', 'drank'],
+  productTypes: ['hoofgerecht', 'dessert', 'drank'],
   printers: ['keuken', 'bar', 'dessert'],
   options: [],
   newOption: '',

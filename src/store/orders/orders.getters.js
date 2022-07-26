@@ -13,6 +13,7 @@ export default {
       product => product.id === productId
     )
   },
+
   correctOrder: (state ) => {
     let errorMessage = ''
     if( state.activeOrder ) {
