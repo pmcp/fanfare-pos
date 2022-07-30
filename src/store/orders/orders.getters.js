@@ -66,13 +66,12 @@ export default {
     const productsWithValues = products.map(p => {
       let allDays = 0
       for(let i = 0; i < dates.length; i += 1){
-        allDays += ordersByDay[dates[i]][p.name]
-        p[dates[i]] = ordersByDay[dates[i]][p.name] || 0
+        allDays += ordersByDay[dates[i]][p.name]*1
+        p[dates[i]] = ordersByDay[dates[i]][p.name]*1 || 0
       }
       p.total = allDays
       return p
     })
-    console.log(productsWithValues)
     const datesForHeaders = dates.map(d => {
       const obj = {
         text: d,
@@ -120,9 +119,7 @@ export default {
     let errorMessage = ''
     if( state.activeOrder ) {
       // 1) Check if there are products
-      console.log('state.activeOrder.products')
       if(state.activeOrder.products) {
-        console.log('there are products')
         //  Per printer (state.activeOrder.products, check if there are products)
           //  Per product, check if there is a quantity
             //  Per product, check if it should have options (in base product settings: rootState.products.options.active: true,

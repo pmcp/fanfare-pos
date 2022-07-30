@@ -12,7 +12,6 @@ export default {
   },
 
   selectedProducts: (state, getters, rootState) => {
-    console.log(rootState.orders)
     if(!rootState.orders) return [];
     return state.products.filter(product => rootState.orders.activeOrder.products[product.printer][product.id].value > 0)
   },
