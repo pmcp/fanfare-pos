@@ -2,5 +2,6 @@ export default {
   orders: [],
   activeOrder: {},
   activeOrderTemplate: null,
-  ordersLoading: false
+  ordersLoading: false,
+  allOrders: []
 }

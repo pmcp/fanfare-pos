@@ -1,11 +1,12 @@
 <template>
   <div>
-    <pos-orders-list :client-id="clientId"></pos-orders-list>
+    <pos-orders-list></pos-orders-list>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+// eslint-disable-next-line import/extensions
 import posOrdersList from '@/components/pos/OrdersList'
 
 export default {

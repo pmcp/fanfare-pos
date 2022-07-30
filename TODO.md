@@ -30,7 +30,7 @@ Login Netgear:
 Raspberry:
 - To find ip: ping raspberrypi
 - login: pi - pmcppaulmcparty
-- wifi = Friendly Network
+  - wifi = Friendly Network
 - ssh pi@ IP adresss
 - Server files are in ~/Documents/firebase-pos-server
 

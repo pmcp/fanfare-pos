@@ -10,9 +10,7 @@ export default {
    */
   getOrders: async ({ commit }, { clientId, active }) => {
     const itemsDb = new ItemsDB('orders')
-
     let constraints = []
-
     if (clientId) {
       constraints = [...constraints, ['clientId', '==', clientId]]
     }
@@ -28,18 +26,22 @@ export default {
     const items = await itemsDb.readAll(constraints)
     commit('setOrders', items)
   },
+
+  getAllOrders: async ({ commit }) => {
+    console.log('getting all orders')
+    const itemsDb = new ItemsDB('orders')
+    const items = await itemsDb.readAll()
+    commit('setAllOrders', items)
+  },
   /**
    * Create an Item
    */
   createOrderFb: async ({ commit, dispatch }, item) => {
-    // userId
-    console.log(item)
 
     const itemsDb = new ItemsDB('orders')
     commit('setLoading', true)
 
     await itemsDb.create(item)
-
     dispatch('getOrders', { active: true })
     commit('setLoading', false)
   },
@@ -156,6 +158,5 @@ export default {
     dispatch('createOrderFb', state.activeOrder)
   //  Move back to home
     router.push(`/`)
-
   },
 }

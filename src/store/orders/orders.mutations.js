@@ -3,6 +3,7 @@ import { cloneDeep, includes } from 'lodash'
 export default {
   // /* Products */
   setOrders: (state, orders) => (state.orders = orders),
+  setAllOrders: (state, orders) => (state.allOrders = orders),
   addOrder: (state, order) => state.orders.push(order),
   setLoading: (state, value) => (state.ordersLoading = value),
   setTotal: (state, value) => (state.activeOrder.total += value),

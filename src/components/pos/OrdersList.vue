@@ -1,29 +1,27 @@
 <template>
   <div>
-    <v-card max-width="600" class="mx-auto">
+    <v-card class="mx-auto">
       <v-list two-line>
-        <v-list-item
-          v-for="client in orders"
-          :key="client.id"
-          @click="getOrders({ clientId: client.id, active: true })"
-        >
-          <v-list-item-avatar>
-            <v-icon v-text="client.table"></v-icon>
-          </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title v-text="client.name"></v-list-item-title>
-            <v-list-item-subtitle
-              v-text="`Client id ${client.id}`"
-            ></v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <v-btn icon>
-              <v-icon color="grey lighten-1">mdi-chevron-right</v-icon>
-            </v-btn>
-          </v-list-item-action>
-        </v-list-item>
+        <div v-if="totals">
+          <v-data-table
+            :options="options"
+            :headers="totals.headers"
+            :items="totals.items"
+            :items-per-page="5"
+            :search="search"
+            class="elevation-1"
+            multi-sort
+            :fixed-header="true"
+          >
+            <template v-slot:top>
+              <v-text-field
+                v-model="search"
+                label="Zoeken"
+                class="mx-4"
+              ></v-text-field>
+            </template>
+          </v-data-table>
+        </div>
       </v-list>
     </v-card>
   </div>
@@ -34,27 +32,27 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
-  props: {
-    clientId: {
-      type: String,
-      default: null
-    }
-  },
   data() {
-    return {}
+    return {
+      search: '',
+      options: {
+        itemsPerPage: 100,
+      }
+    }
   },
   computed: {
     ...mapGetters('clients', ['isProductDeletionPending']),
+    ...mapGetters('orders', ['totals']),
     ...mapState('clients', ['clients', 'ordersLoading']),
-    ...mapState('orders', ['orders']),
+    ...mapState('orders', ['allOrders']),
     ...mapState('app', ['networkOnLine'])
   },
   mounted() {
-    this.getOrders({ clientId: this.clientId, active: true })
+    this.getAllOrders()
   },
 
   methods: {
-    ...mapActions('orders', ['getOrders'])
+    ...mapActions('orders', ['getAllOrders'])
   }
 }
 </script>
