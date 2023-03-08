@@ -40,46 +40,48 @@
         </div>
 
 
-<!--      <div v-if="product.options.active">-->
-<!--        <v-row v-for="(productOptions, k) in activeOrder.products[product.printer][product.id].options" :key="`productOptions-${k}`">-->
-<!--          <v-col cols="8" >-->
-<!--            <div v-if="product.options.selectMultiple">-->
-<!--              <v-checkbox-->
-<!--                v-for="(option, y) in product.options.value"-->
-<!--                :value="true"-->
-<!--                :key="`choice-checkbox-option-${y}`"-->
-<!--                :label="option"-->
-<!--                @change="setActiveOrderOption({ value: option, product, option: k, multiple: true })"-->
-<!--              >-->
-<!--              </v-checkbox>-->
-<!--            </div>-->
-<!--            <div v-else>-->
-<!--              <v-radio-group-->
-<!--                :value="activeOrder.products[product.printer][product.id].options[k]"-->
-<!--                @change="setActiveOrderOption({ value: $event, product, option: k, multiple: false })"-->
-<!--                row-->
-<!--              >-->
-<!--                <v-radio v-for="(option, y) in product.options.value" :value="y" :key="`choice-${k}-option-${y}`" :label="option"></v-radio>-->
-<!--              </v-radio-group>-->
-<!--            </div>-->
-<!--          </v-col>-->
-<!--          <v-col cols="4">-->
-<!--            <v-btn-->
-<!--              class="ma-3"-->
-<!--              depressed-->
-<!--              small-->
-<!--              @click="-->
-<!--              changeProductToActiveOrder({-->
-<!--                product: product,-->
-<!--                value: -1,-->
-<!--                position: k-->
-<!--              })-->
-<!--            "-->
-<!--            ><v-icon>mdi-minus</v-icon></v-btn-->
-<!--            >-->
-<!--          </v-col>-->
-<!--        </v-row>-->
-<!--    </div>-->
+      <div v-if="product.options.active">
+        <v-row v-for="(productOptions, k) in activeOrder.products[product.printer][product.id].value" :key="`productOptions-${k}`">
+          <v-col cols="8"  >
+            <div v-if="product.options.selectMultiple">
+              <v-checkbox
+                v-for="(option, y) in product.options.value"
+                :value="true"
+                :key="`choice-checkbox-option-${y}`"
+                :label="option"
+                @change="setActiveOrderOption({ value: option, product, option: k, multiple: true })"
+              >
+              </v-checkbox>
+            </div>
+            <div v-else>
+              <v-radio-group
+                :value="activeOrder.products[product.printer][product.id].options[k]"
+                @change="setActiveOrderOption({ value: $event, product, option: k, multiple: false })"
+                row
+              >
+
+                <v-radio v-for="(option, y) in product.options.value" :value="option" :key="`choice-${k}-option-${y}`" :label="option">
+                </v-radio>
+              </v-radio-group>
+            </div>
+          </v-col>
+          <v-col cols="4">
+            <v-btn
+              class="ma-3"
+              depressed
+              small
+              @click="
+              changeProductToActiveOrder({
+                product: product,
+                value: -1,
+                position: k
+              })
+            "
+            ><v-icon>mdi-minus</v-icon></v-btn
+            >
+          </v-col>
+        </v-row>
+    </div>
     </v-layout>
     <v-layout row v-if="product.remark && activeOrder.products[product.printer][product.id].value > 0">
       <v-flex

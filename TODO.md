@@ -1,7 +1,11 @@
 DOING
-- Sync to excel via zapier
+
 
 TODO
+- Make table based
+- product: if options.length !== value, don't continue
+- Add view for final check
+- Sync to excel via zapier
 - Printer beheer erin steken ( kies locatie - print test )
 - Melding dat ok bij verstuur
 - Terugkoppeling bestelling - verstuurd - printed

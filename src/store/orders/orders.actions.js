@@ -38,6 +38,8 @@ export default {
    */
   createOrderFb: async ({ commit, dispatch }, item) => {
 
+    console.log(item)
+    //
     const itemsDb = new ItemsDB('orders')
     commit('setLoading', true)
 
@@ -129,7 +131,7 @@ export default {
         price: product.price,
         name: product.name,
         type: product.type,
-        options: {},
+        options: [],
         value: 0,
         order: product.order,
         remark: '',
