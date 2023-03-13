@@ -1,27 +1,30 @@
 <template>
   <div v-if="clients">
+
     <v-card max-width="600" class="mx-auto">
       <v-list two-line>
         <v-list-item
           v-for="client in clients"
           :key="client.id"
-          @click="createNewOrder(client)"
+
         >
-          <v-list-item-avatar>
-            <v-icon v-text="client.table"></v-icon>
-          </v-list-item-avatar>
+
 
           <v-list-item-content>
             <v-list-item-title v-text="client.name"></v-list-item-title>
             <v-list-item-subtitle
-              v-text="`Client id ${client.id}`"
+              v-text="`${client.table}`"
             ></v-list-item-subtitle>
           </v-list-item-content>
 
           <v-list-item-action>
-            <v-btn icon>
-              <v-icon color="grey lighten-1">mdi-chevron-right</v-icon>
-            </v-btn>
+            <div>
+              <v-btn color="info" class="mx-2" @click="viewAllOrders(client)">Bekijk overzicht</v-btn>
+              <v-btn color="success" @click="createNewOrder(client)">Bestel</v-btn>
+            </div>
+<!--            <v-btn icon>-->
+<!--              <v-icon color="grey lighten-1">Bestel</v-icon>-->
+<!--            </v-btn>-->
           </v-list-item-action>
         </v-list-item>
       </v-list>
@@ -46,7 +49,9 @@ export default {
   },
   mounted() {
     // Get all the active clients
-    this.getClients({ active: true })
+
+    this.getClients({ active: true, date: new Date() })
+    // this.getClients({ active: true, date: false })
   },
 
   methods: {
@@ -54,7 +59,12 @@ export default {
     ...mapActions('orders', ['setActiveOrderForClient']),
     createNewOrder(client) {
       this.setActiveOrderForClient(client)
+      console.log(client)
       router.push({ path: `clients/${client.id}/order` })
+    },
+    viewAllOrders(client) {
+      // this.setActiveOrderForClient(client)
+      router.push({ path: `clients/${client.id}/` })
     },
   }
 }

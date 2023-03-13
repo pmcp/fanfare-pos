@@ -67,7 +67,7 @@ export default class GenericDB {
   async readAll(constraints = null) {
     const collectionRef = (await firestore()).collection(this.collectionPath)
     let query = collectionRef
-
+    query.orderBy("createTimestamp")
     if (constraints) {
       constraints.forEach(constraint => {
         query = query.where(...constraint)

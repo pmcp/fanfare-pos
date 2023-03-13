@@ -68,11 +68,11 @@ const router = new Router({
         import(/* webpackChunkName: "client-chunk-products" */ '@/views/Admin-Products.vue')
     },
     {
-      path: '/clients/:clientId/orders',
+      path: '/clients/:clientId/',
       name: 'clientOrders',
       props: true,
       component: () =>
-        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Pos-Orders.vue')
+        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Pos-Client.vue')
     },
     {
       path: '/clients/:clientId/order',
@@ -90,7 +90,7 @@ const router = new Router({
 
     {
       path: '/orders',
-      name: '   ',
+      name: 'orders',
       component: () =>
         import(/* webpackChunkName: "client-chunk-products" */ '@/views/Pos-Orders.vue')
     },

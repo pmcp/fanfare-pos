@@ -9,10 +9,12 @@ export default {
    * Fetch Items
    */
   getOrders: async ({ commit }, { clientId, active }) => {
+    console.log('getOrders', clientId, active)
     const itemsDb = new ItemsDB('orders')
     let constraints = []
     if (clientId) {
-      constraints = [...constraints, ['clientId', '==', clientId]]
+      console.log('getOrders', clientId, active)
+      constraints = [...constraints, ['user.id', '==', clientId]]
     }
     /* If we are looking for active items, set a constraint for the type */
     if (active) {
@@ -23,6 +25,8 @@ export default {
     if (constraints.length === 0) {
       constraints = null
     }
+
+    console.log(constraints)
     const items = await itemsDb.readAll(constraints)
     commit('setOrders', items)
   },
@@ -33,10 +37,15 @@ export default {
     const items = await itemsDb.readAll()
     commit('setAllOrders', items)
   },
+
+  getClientOrders: async ({ dispatch }, client) => {
+    dispatch('getOrders', { clientId: client.client, active: false })
+  },
   /**
    * Create an Item
    */
   createOrderFb: async ({ commit, dispatch }, item) => {
+
 
     console.log(item)
     //
@@ -159,6 +168,16 @@ export default {
   createOrder: ({ state, dispatch }) => {
     dispatch('createOrderFb', state.activeOrder)
   //  Move back to home
+    router.push(`/`)
+  },
+
+
+  printTotalOrder: ({ state, dispatch }, order) => {
+
+    // dispatch('createOrderFb', order)
+    // Set user as non active
+    console.log('here')
+    dispatch('clients/setClientNonActive', order.user.id, {root:true})
     router.push(`/`)
   },
 }

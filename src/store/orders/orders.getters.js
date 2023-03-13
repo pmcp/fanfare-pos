@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { find, forOwn } from 'lodash'
 
 export default {
@@ -138,4 +140,55 @@ export default {
     return errorMessage
 
   },
+
+  combinedOrders: (state) => {
+    console.log('here', state.orders)
+    if(state.orders.length < 1) return null
+    //
+    // console.log(state.orders)
+    let total = 0
+
+    const afrekeningPrinter = state.orders.reduce((merged, order) => {
+      // Count up products
+      for (const [location, products] of Object.entries(order.products)) {
+        for (const [productKey, product] of Object.entries(products)) {
+          if(merged[productKey] === undefined) {
+            merged[productKey] = product
+            total = total + product.value * 1
+          } else {
+            merged[productKey].value = merged[productKey].value + product.value * 1
+            total = total + product.value * 1
+          }
+        }
+      }
+      return merged;
+    }, {});
+
+    const printer = {
+      afrekening: afrekeningPrinter
+    }
+
+    const final = {
+      printStatus: state.orders[0].printStatus,
+      remarks: state.orders[0].remarks,
+      user: state.orders[0].user,
+      waiter: state.orders[0].waiter,
+      total: total,
+      products: printer,
+      orderType: 'afrekening'
+    }
+
+
+
+
+
+
+
+
+
+    return final
+
+
+  }
+
 }

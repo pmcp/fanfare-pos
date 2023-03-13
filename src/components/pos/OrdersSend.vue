@@ -25,7 +25,7 @@ export default {
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('orders', ['activeOrder']),
-    ...mapGetters('orders', ['readableOrder'])
+    // ...mapGetters('orders', ['readableOrder'])
   },
   methods: {
     ...mapActions('orders', ['createOrder']),
@@ -36,13 +36,13 @@ export default {
       this.createOrder()
       this.overlay = false
     },
-    orderProducts(products){
-      const array = Object.values(products);
-      const filtered = array.filter(x => x.value !== 0)
-      const sorted = filtered.sort((a, b) => (a.order*1 > b.order*1) ? 1 : -1)
-      console.log(sorted)
-      return sorted
-    }
+    // orderProducts(products){
+    //   const array = Object.values(products);
+    //   const filtered = array.filter(x => x.value !== 0)
+    //   const sorted = filtered.sort((a, b) => (a.order*1 > b.order*1) ? 1 : -1)
+    //   console.log(sorted)
+    //   return sorted
+    // }
   }
 }
 </script>

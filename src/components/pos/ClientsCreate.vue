@@ -1,5 +1,6 @@
 <template>
   <v-container fill-height fluid class="h-full">
+
     <v-layout justify-center  row fill-height>
       <v-text-field
         v-model="newClient.table"
@@ -7,7 +8,6 @@
         color="black"
         @keydown.enter="add(newClient)"
       ></v-text-field>
-
       <v-bottom-navigation fixed horizontal grow>
         <v-btn color="green"  block @click="add(newClient)">
           Start
