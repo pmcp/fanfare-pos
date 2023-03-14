@@ -12,6 +12,7 @@ export default {
     console.log('getOrders', clientId, active)
     const itemsDb = new ItemsDB('orders')
     let constraints = []
+    constraints = [...constraints, ['orderType', '==', 'normal']]
     if (clientId) {
       console.log('getOrders', clientId, active)
       constraints = [...constraints, ['user.id', '==', clientId]]
@@ -26,9 +27,11 @@ export default {
       constraints = null
     }
 
-    console.log(constraints)
+    // console.log(constraints)
     const items = await itemsDb.readAll(constraints)
     commit('setOrders', items)
+    console.log(items)
+
   },
 
   getAllOrders: async ({ commit }) => {
@@ -47,10 +50,13 @@ export default {
   createOrderFb: async ({ commit, dispatch }, item) => {
 
 
-    console.log(item)
+    console.log('gonna save order', item)
     //
     const itemsDb = new ItemsDB('orders')
     commit('setLoading', true)
+    if(!item.orderType) item.orderType = 'normal'
+    console.log(item)
+
 
     await itemsDb.create(item)
     dispatch('getOrders', { active: true })
@@ -173,11 +179,11 @@ export default {
 
 
   printTotalOrder: ({ state, dispatch }, order) => {
-
-    // dispatch('createOrderFb', order)
+    console.log(order)
+    dispatch('createOrderFb', order)
     // Set user as non active
     console.log('here')
-    dispatch('clients/setClientNonActive', order.user.id, {root:true})
-    router.push(`/`)
+    // dispatch('clients/setClientNonActive', order.user.id, {root:true})
+    // router.push(`/`)
   },
 }

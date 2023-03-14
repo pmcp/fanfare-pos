@@ -37,7 +37,7 @@ Raspberry:
   - wifi = Friendly Network
 - ssh pi@ IP adresss
 - Server files are in ~/Documents/firebase-pos-server
-
+§
 
 Handleiding
 - Eerst printers opstarten: als blauw lichtje brandt: ok.
