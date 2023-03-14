@@ -32,6 +32,7 @@ export default {
     commit('setOrders', items)
     console.log(items)
 
+
   },
 
   getAllOrders: async ({ commit }) => {
@@ -178,12 +179,12 @@ export default {
   },
 
 
-  printTotalOrder: ({ state, dispatch }, order) => {
+  printTotalOrder: async ({ state, dispatch }, order) => {
     console.log(order)
-    dispatch('createOrderFb', order)
+    await dispatch('createOrderFb', order)
     // Set user as non active
-    console.log('here')
-    // dispatch('clients/setClientNonActive', order.user.id, {root:true})
-    // router.push(`/`)
+    console.log('test')
+    dispatch('clients/setClientNonActive', order.user.id, {root:true})
+    router.push(`/`)
   },
 }
