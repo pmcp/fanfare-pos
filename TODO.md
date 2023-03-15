@@ -1,5 +1,6 @@
 DOING
 - Add options to print
+- Change vlaamse kermis to Eetfestijn
 
 TODO
 - product: if options.length !== value, don't continue

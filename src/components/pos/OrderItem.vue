@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="pa-4">
-    <v-layout row>
+    <v-layout row class="">
       <div class="item">
         <div class="item_text" style="margin-top:6px;">
           <div class="item_textContainer">
@@ -40,9 +40,9 @@
         </div>
 
 
-      <div v-if="product.options.active">
-        <v-row v-for="(productOptions, k) in activeOrder.products[product.printer][product.id].value" :key="`productOptions-${k}`">
-          <v-col cols="8"  >
+      <div v-if="product.options.active" style="width:100%">
+        <v-row v-for="(productOptions, k) in activeOrder.products[product.printer][product.id].value" :key="`productOptions-${k}`" >
+          <v-col cols="9" class="grey-lighten-3 ma-0 pa-0 pl-2 justify-space-around ">
             <div v-if="product.options.selectMultiple">
               <v-checkbox
                 v-for="(option, y) in product.options.value"
@@ -57,7 +57,7 @@
               <v-radio-group
                 :value="activeOrder.products[product.printer][product.id].options[k]"
                 @change="setActiveOrderOption({ value: $event, product, option: k, multiple: false })"
-                row
+
               >
 
                 <v-radio v-for="(option, y) in product.options.value" :value="option" :key="`choice-${k}-option-${y}`" :label="option">
@@ -65,9 +65,9 @@
               </v-radio-group>
             </div>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="3" class="text-right">
             <v-btn
-              class="ma-3"
+              class="mt-3"
               depressed
               small
               @click="

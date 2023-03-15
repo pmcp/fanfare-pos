@@ -1,7 +1,8 @@
 <template>
   <div>
-    <pos-clients-list></pos-clients-list>
     <pos-clients-create></pos-clients-create>
+    <pos-clients-list></pos-clients-list>
+    <div style="height:20vh"></div>
   </div>
 </template>
 

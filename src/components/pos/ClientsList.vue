@@ -1,15 +1,12 @@
 <template>
   <div v-if="clients">
 
-    <v-card max-width="600" class="mx-auto">
+    <v-card class="mx-auto">
       <v-list two-line>
         <v-list-item
           v-for="client in clients"
           :key="client.id"
-
         >
-
-
           <v-list-item-content>
             <v-list-item-title v-text="client.name"></v-list-item-title>
             <v-list-item-subtitle
@@ -19,8 +16,8 @@
 
           <v-list-item-action>
             <div>
-              <v-btn color="info" class="mx-2" @click="viewAllOrders(client)">Bekijk overzicht</v-btn>
-              <v-btn color="success" @click="createNewOrder(client)">Bestel</v-btn>
+              <v-btn color="info" class="mx-2" @click="viewAllOrders(client)">Afrekening</v-btn>
+              <v-btn color="warning" @click="createNewOrder(client)">Bestel</v-btn>
             </div>
 <!--            <v-btn icon>-->
 <!--              <v-icon color="grey lighten-1">Bestel</v-icon>-->

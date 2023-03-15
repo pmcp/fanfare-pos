@@ -179,12 +179,12 @@ export default {
   },
 
 
-  printTotalOrder: async ({ state, dispatch }, order) => {
+  printTotalOrder: async ({ dispatch }, order) => {
     console.log(order)
     await dispatch('createOrderFb', order)
     // Set user as non active
-    console.log('test')
-    dispatch('clients/setClientNonActive', order.user.id, {root:true})
-    router.push(`/`)
+    // console.log('test')
+    // dispatch('clients/setClientNonActive', order.user.id, {root:true})
+    // router.push(`/`)
   },
 }
