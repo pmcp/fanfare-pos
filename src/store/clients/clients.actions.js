@@ -75,10 +75,11 @@ export default {
     const itemsDb = new ItemsDB('clients')
     commit('setLoading', true)
     await itemsDb.update(client)
+    console.log(client)
     commit('setLoading', false)
   },
 
-  setClientNonActive: async ({ commit, dispatch }, clientId) => {
+  setClientNonActive: async ({ dispatch }, clientId) => {
     // Was here: need to get + update this client with active: false
     const itemsDb = new ItemsDB('clients')
     const client = await itemsDb.read(clientId)
@@ -86,6 +87,7 @@ export default {
     client.active = false
     console.log(client)
     dispatch('updateClient', client)
+
     //
   },
 

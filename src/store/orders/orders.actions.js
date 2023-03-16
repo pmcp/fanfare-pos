@@ -181,10 +181,10 @@ export default {
 
   printTotalOrder: async ({ dispatch }, order) => {
     console.log(order)
+    order.printStatus = 0
     await dispatch('createOrderFb', order)
     // Set user as non active
-    // console.log('test')
-    // dispatch('clients/setClientNonActive', order.user.id, {root:true})
-    // router.push(`/`)
+    dispatch('clients/setClientNonActive', order.user.id, {root:true})
+    router.push(`/`)
   },
 }
