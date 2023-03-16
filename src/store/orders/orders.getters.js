@@ -24,6 +24,7 @@ export default {
       // Loop through all products of the bar in the current order and put it in the products array
       forOwn(p.bar, (value) => combined.push(value));
       forOwn(p.keuken, (value) => combined.push(value));
+      forOwn(p.dessert, (value) => combined.push(value));
       // We now have an array of products for each order
       // Reduce this to count totals per product
       const onlyTotals = combined.reduce((acc, curr) => {
@@ -41,7 +42,8 @@ export default {
     // Get all the products
     const products = [...rootState.products.products]
     // Get all the orders
-    const orders = state.allOrders
+
+    const orders = state.allOrders.filter(x => x.orderType === 'normal')
 
     // Per product: add dates of orders and values per date
     const ordersByDay = orders.reduce( (acc, curr) => {
@@ -189,6 +191,15 @@ export default {
     return final
 
 
-  }
+  },
+
+  ordersForHistory: (state ) => {
+    if( state.allOrders ) {
+      const ordersNoFinal = state.allOrders.filter(x => x.orderType === 'normal')
+      return ordersNoFinal
+    } else {
+      return []
+    }
+  },
 
 }

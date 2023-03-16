@@ -1,6 +1,5 @@
 <template>
-  <div v-if="clients">
-
+  <div v-if="clients.length > 0 ">
     <v-card class="mx-auto">
       <v-list two-line>
         <v-list-item

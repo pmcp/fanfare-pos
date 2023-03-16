@@ -1,9 +1,8 @@
 DOING
-- Add options to print
-- Change vlaamse kermis to Eetfestijn
+- MELDEN VA: Aperitief: Bij schrijven als opmerking keuken
+- - product: if options.length !== value, don't continue
 
 TODO
-- product: if options.length !== value, don't continue
 - Add view for final check
 - Sync to excel via zapier
 - Printer beheer erin steken ( kies locatie - print test )
