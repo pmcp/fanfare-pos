@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="pa-4">
-    <v-layout row class="">
+    <v-layout row style="flex-direction:column">
       <div class="item">
         <div class="item_text" style="margin-top:6px;">
           <div class="item_textContainer">
