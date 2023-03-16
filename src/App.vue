@@ -110,6 +110,7 @@ body {
 
     .new-content-available-toastr {
       position: absolute;
+      z-index: 100;
       bottom: 10px;
       right: 10px;
     }

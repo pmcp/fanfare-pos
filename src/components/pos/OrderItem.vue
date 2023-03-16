@@ -67,7 +67,7 @@
           </v-col>
           <v-col cols="3" class="text-right">
             <v-btn
-              class="mt-3"
+              class="mt-3 red"
               depressed
               small
               @click="
