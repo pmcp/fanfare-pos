@@ -1,6 +1,14 @@
+POSTMORTEM EETFESTIJN
+- Probleem: drie printers bekabeld, 1tje netwerkkabel was connectie verloren
+  - Oplossing:
+    - Checken if printer is connected, waarschuwing 
+    - Checken if message is printed
+    - View na bestelling: all is printed
+
+Wifi: teltonika+rut950
+
+
 DOING
-- MELDEN VA: Aperitief: Bij schrijven als opmerking keuken
-- - product: if options.length !== value, don't continue
 
 TODO
 - Add view for final check
@@ -9,6 +17,7 @@ TODO
 - Melding dat ok bij verstuur
 - Terugkoppeling bestelling - verstuurd - printed
 - Filmpje maken voor installatie
+
 
 OLD
 - Add remark for ordering + printing
