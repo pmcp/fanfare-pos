@@ -4,6 +4,11 @@ POSTMORTEM EETFESTIJN
     - Checken if printer is connected, waarschuwing 
     - Checken if message is printed
     - View na bestelling: all is printed
+- Afrekening niet tonen aan opnemers, wel aan "admin"
+  - afrekening knop optioneel maken (want weg voor vlaamse kermis)
+  - Titel instelbaar
+
+
 
 Wifi: teltonika+rut950
 
