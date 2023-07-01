@@ -95,6 +95,13 @@ const router = new Router({
         import(/* webpackChunkName: "client-chunk-products" */ '@/views/Pos-Orders.vue')
     },
 
+    {
+      path: '/history',
+      name: 'history',
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-products" */ '@/views/History.vue')
+    },
+
 
     // {
     //   path: '/products/:id',
