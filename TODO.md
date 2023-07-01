@@ -30,27 +30,16 @@ Wifi: teltonika+rut950
 
 
 DOING
+- Set back the IP of printer to .1.72 (use app: EpsonNet Config)
 
 TODO
-- Add view for final check
-- Sync to excel via zapier
-- Printer beheer erin steken ( kies locatie - print test )
-- Melding dat ok bij verstuur
-- Terugkoppeling bestelling - verstuurd - printed
-- Filmpje maken voor installatie
-
-
-OLD
-- Add remark for ordering + printing
-- Clean up ordering form
-- How to handle users   (waiters)?
-- Add place to fill in printer (IP etc)
-- Fix service account shizzle (disabled for now)
-- Add printers to mobile vikings
-- Fix login flow (or remove)
-- What if a printer is out?
+- Add orders to an event?
+- Watch event on printers
 
 INFO
+Start dev:
+- For now use nvm 16
+
 Login Epson printer:
 - Go to ip (that comes out of printer)
 - Login: epson - epson

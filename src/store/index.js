@@ -5,6 +5,7 @@ import app from './app'
 import products from './products'
 import clients from './clients'
 import orders from './orders'
+import system from './system'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     app,
     products,
     clients,
-    orders
+    orders,
+    system
   }
 })

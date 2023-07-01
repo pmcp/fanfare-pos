@@ -7,7 +7,7 @@
             <span class="body-1" >{{ product.name }}</span>
           </div>
         </div>
-          <span class="font-weight-black text-center" style="padding-left:20px;padding-top: 6px;padding-right:20px; ">{{ activeOrder.products[product.printer][product.id].value }}</span>
+
           <v-btn
             v-if="!product.options.active"
             depressed
@@ -37,6 +37,7 @@
           >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
+        <span class="font-weight-black text-center" style="width:60px;padding-left:20px;padding-top: 6px;padding-right:20px; ">{{ activeOrder.products[product.printer][product.id].value }}</span>
         </div>
 
 
@@ -68,6 +69,7 @@
           <v-col cols="3" class="text-right">
             <v-btn
               class="mt-3 red"
+              style="margin-right:400px"
               depressed
               small
               @click="

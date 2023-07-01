@@ -38,12 +38,22 @@
     <v-app-bar app  dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>Vlaamse Kermis 2022</v-toolbar-title>
+
     </v-app-bar>
 
+
     <v-content>
-      <v-container fill-height fluid>
+
+      <v-container fill-height fluid align="start" justify="center" style="align-items:start">
         <v-row align="start" justify="center">
           <v-col cols="12">
+            <pos-error-message v-if="printersWithIssues.length > 0">
+              <span>Printers met problemen:</span>
+              <span v-for="p in printersWithIssues" :key="p.id">
+                {{ p.location }}
+              </span>
+            </pos-error-message>
+
             <router-view />
           </v-col>
         </v-row>
@@ -68,21 +78,29 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 // eslint-disable-next-line import/extensions
 import NewContentAvailableToastr from '@/components/NewContentAvailableToastr'
+import posErrorMessage from '@/components/pos/ErrorMessage.vue'
 // eslint-disable-next-line import/extensions
 import AppleAddToHomeScreenModal from '@/components/AppleAddToHomeScreenModal'
 
 export default {
-  components: { NewContentAvailableToastr, AppleAddToHomeScreenModal },
+  components: { NewContentAvailableToastr, AppleAddToHomeScreenModal, posErrorMessage },
   data: () => ({
-    drawer: null
+    drawer: null,
   }),
   computed: {
     ...mapGetters('app', ['newContentAvailable']),
-    ...mapState('app', ['showAddToHomeScreenModalForApple', 'refreshingApp'])
+    ...mapState('app', ['showAddToHomeScreenModalForApple', 'refreshingApp']),
+    ...mapGetters('system', ['printersWithIssues'])
   },
   methods: {
-    ...mapActions('app', ['closeAddToHomeScreenModalForApple', 'serviceWorkerSkipWaiting'])
-  }
+    ...mapActions('app', ['closeAddToHomeScreenModalForApple', 'serviceWorkerSkipWaiting']),
+    ...mapActions('system', ['getPrinters'])
+  },
+  mounted() {
+    // Get the orders of this client
+    this.getPrinters()
+
+  },
 }
 </script>
 
