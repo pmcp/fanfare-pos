@@ -1,6 +1,8 @@
 <template>
   <div>
-    <pre>{{ notifications }}</pre>
+    <div v-for="n in notifications" :key="n.id">
+      {{ n }}
+    </div>
   </div>
 </template>
 <script>
@@ -14,7 +16,6 @@ export default {
     ...mapActions('system', ['getNotifications'])
   },
   mounted() {
-    // Get the orders of this client
     this.getNotifications()
   },
 }
